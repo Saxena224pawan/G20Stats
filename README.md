@@ -1,8 +1,8 @@
 # G20Stats
 
- You need to install following packages in the Rstudio.
 
-# YOu can install these packaages using install.packages("<package name here>")
+
+#### You need to install these packages using install.packages("<package name here>")
 
  1.forecast.
 
