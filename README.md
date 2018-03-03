@@ -37,9 +37,12 @@
  
  shows the future forecast of different factors of different countries.
 
-### Factors that we are using here
+## Factors that we are using here
 
- 1.GDP.
- 2.GDP per capita.
- 3.Life Expectancy.
- 4.GDP growth.
+  1.GDP.
+ 
+  2.GDP per capita.
+ 
+  3.Life Expectancy.
+ 
+  4.GDP growth.
