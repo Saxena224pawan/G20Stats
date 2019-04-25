@@ -7,12 +7,12 @@
 2. Install these packages using install.packages("<package name here>")
  ```bash
 forecast.
-shiny.<br/>
-ggplot2.<br/>
-wbstats.<br/>
-dynlm.<br/>
-astsa.<br/>
-xts.<br/>
+shiny.
+ggplot2.
+wbstats.
+dynlm.
+astsa.
+xts.
    ```
 
 # This shiny app contains 4 screens
