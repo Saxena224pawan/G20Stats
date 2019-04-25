@@ -1,24 +1,19 @@
 # G20Stats
 
 
+## Installation
 
-#### You need to install these packages using install.packages("<package name here>")
-
- 1.forecast.
-
- 2.shiny.
-
- 3.ggplot2.
- 
- 4.wbstats.
- 
- 5.dynlm.
- 
- 6.corrplot.
-
- 7.astsa.
-
- 8.xts.
+1. Clone this repository
+2. Install these packages using install.packages("<package name here>")
+   ```bash
+forecast.
+shiny.
+ggplot2.
+wbstats.
+dynlm.
+astsa.
+xts.
+   ```
 
 # This shiny app contains 4 screens
  
