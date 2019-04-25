@@ -5,14 +5,14 @@
 
 1. Clone this repository
 2. Install these packages using install.packages("<package name here>")
-   ```bash
-forecast.
-shiny.
-ggplot2.
-wbstats.
-dynlm.
-astsa.
-xts.
+ ```bash
+forecast.<br/>
+shiny.<br/>
+ggplot2.<br/>
+wbstats.<br/>
+dynlm.<br/>
+astsa.<br/>
+xts.<br/>
    ```
 
 # This shiny app contains 4 screens
