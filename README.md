@@ -14,6 +14,12 @@ dynlm.
 astsa.
 xts.
    ```
+3.Run shiny app with Run app button or
+  ```bash
+ runApp("app")
+   ```
+ 
+
 
 # This shiny app contains 4 screens
  
