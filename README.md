@@ -6,7 +6,7 @@
 1. Clone this repository
 2. Install these packages using install.packages("<package name here>")
  ```bash
-forecast.<br/>
+forecast.
 shiny.<br/>
 ggplot2.<br/>
 wbstats.<br/>
