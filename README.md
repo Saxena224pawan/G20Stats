@@ -1,6 +1,9 @@
 # G20Stats
 
 
+Visit this[Shiny app Link](https://pawan-saxena.shinyapps.io/G20Stats) link to see a demo
+
+
 ## Installation
 
 1. Clone this repository
