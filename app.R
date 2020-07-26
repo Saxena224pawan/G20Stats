@@ -19,6 +19,10 @@ suppressWarnings(library(dynlm))
 suppressWarnings(library(astsa))
 suppressWarnings(library(xts))
 
+# Define list of countries
+countries= list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+symbols = list(Australia='AU',Russia='RU',India='IN',China='CN',US='US',Canada='CA',European_Union="EU",Great_Britain='GB',France='FR',Germany='DE',Japan='JP',Argentina='AR',Brazil='BR',Indonesia='ID',Italy='IT',Mexico='MX',South_Africa='ZA',Saudi_Arabia='SA'
+               ,Turkey='TR',South_Korea='KR')
 # Define UI for application that draws a histogram
 ui=
   navbarPage("Shiny App",
@@ -44,7 +48,7 @@ ui=
                         
                         
                         selectInput("state1", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                                     
                         ),
                         
@@ -63,23 +67,23 @@ ui=
              tabPanel("Comaprison",
                       sidebarPanel(
                         selectInput("state5", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                  countries
                         ),selectInput("state6", "Choose a Country:",
-                                      list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                      countries
                         ),
                         selectInput("state7", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                         ),
                         selectInput("state10", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                         ),
                         selectInput("state8", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                         ),
                         selectInput("state9", "Choose a Parameter:",list("GDP","GDPgrowth","perCapita","lifeExpectancy")),
                         downloadButton(
                           outputId = "down4",label="Download This Plot"),
-                        radioButtons("var2",label="Select File Type",choices=list("png","pdf")),
+                        radioButtons("var4",label="Select File Type",choices=list("png","pdf")),
                         sliderInput("bin2",
                                     "Choose Start Years:",
                                     min = 1960,
@@ -101,18 +105,18 @@ ui=
                       ),
                       sidebarPanel(
                         selectInput("state31", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                         ),selectInput("state32", "Choose a Country:",
-                                      list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                      countries
                         ),
                         selectInput("state33", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                         ),
                         selectInput("state34", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                         ),
                         selectInput("state36", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                         ),
                         selectInput("state35", "Choose a Parameter:",list("GDP","GDPgrowth","perCapita","lifeExpectancy"))
                         
@@ -123,15 +127,14 @@ ui=
                       
              ),
              tabPanel(" Future Forecast",
-                      # Application title
-                      titlePanel("FOrcasted Data"),
+                      titlePanel("Forecasted Data"),
                       
                       # Sidebar with a slider input for number of bins 
                       
                       sidebarPanel(
                         selectInput("stateF", "Choose a Parameter:",list("GDP","GDPgrowth","perCapita","lifeExpectancy")),
                         selectInput("state100", "Choose a Country:",
-                                    list("Australia","Argentina","Brazil","Canada","China","European_Union","France","Germany","India","Italy","Indonesia","Japan","Mexico","Russia","Saudi_Arabia","South_Africa","South_Korea","Turkey","Great_Britain","US")
+                                    countries
                         ),
                         
                         
@@ -154,9 +157,7 @@ server = function(input, output) {
   
   data<-reactive({    
     parametres=list(GDP='NY.GDP.MKTP.CD',GDPgrowth="NY.GDP.MKTP.KD.ZG",perCapita="NY.GDP.PCAP.CD",lifeExpectancy="SP.DYN.LE00.IN")
-    country=list(Australia='AU',Russia='RU',India='IN',China='CN',US='US',Canada='CA',European_Union="EU",Great_Britain='GB',France='FR',Germany='DE',Japan='JP',Argentina='AR',Brazil='BR',Indonesia='ID',Italy='IT',Mexico='MX',South_Africa='ZA',Saudi_Arabia='SA'
-                 ,Turkey='TR',South_Korea='KR')
-    
+    country=symbols
     
     p=data.frame(wb(indicator=parametres[input$state],country=country[input$state1],startdate=input$bins,enddate = input$bin1))
     p
@@ -164,17 +165,14 @@ server = function(input, output) {
   
   data4<-reactive({    
     parametres=list(GDP='NY.GDP.MKTP.CD',GDPgrowth="NY.GDP.MKTP.KD.ZG",perCapita="NY.GDP.PCAP.CD",lifeExpectancy="SP.DYN.LE00.IN")
-    country=list(Australia='AU',Russia='RU',India='IN',China='CN',US='US',Canada='CA',European_Union="EU",Great_Britain='GB',France='FR',Germany='DE',Japan='JP',Argentina='AR',Brazil='BR',Indonesia='ID',Italy='IT',Mexico='MX',South_Africa='ZA',Saudi_Arabia='SA'
-                 ,Turkey='TR',South_Korea='KR')
+    country=symbols
     p=data.frame(wb(indicator=parametres[input$stateF],country=country[input$state100],startdate=1960,enddate = 2016))
     p})
   
   
   data1<-reactive({                             
     parametres=list(GDP='NY.GDP.MKTP.CD',GDPgrowth="NY.GDP.MKTP.KD.ZG",perCapita="NY.GDP.PCAP.CD",lifeExpectancy="SP.DYN.LE00.IN") 
-    country=list(Australia='AU',Russia='RU',India='IN',China='CN',US='US',Canada='CA',European_Union="EU",Great_Britain='GB',France='FR',Germany='DE',Japan='JP',Argentina='AR',Brazil='BR',Indonesia='ID',Italy='IT',Mexico='MX',South_Africa='ZA',Saudi_Arabia='SA'
-                 ,Turkey='TR',South_Korea='KR')
-    
+    country=symbols
     
     p=data.frame(wb(indicator=parametres[input$state9],country=c(country[input$state5],country[input$state6],country[input$state7],country[input$state8],country[input$state9],country[input$state10]),startdate=input$bin2,enddate = input$bin3))
     p
@@ -193,19 +191,16 @@ server = function(input, output) {
   })
   output$plot6=renderPlot({
     data_univariate=data4()
-    data_univariate=data_univariate[,1:2]
-    View(data_univariate)
+    data_univariate=data_univariate[,1:3]
     dates=as.Date(data_univariate$date,"%Y")
     xs=xts(data_univariate$value,order.by=dates)
     x.ts = ts(xs, freq=1, start=1960)
     time_s=ets(x.ts,damped = FALSE)
-    fcast=forecast(time_s,h=5) 
+    fcast=forecast(time_s,h=10) 
     plot(fcast,xlab="date",ylab=as.character(parametres[input$stateF]),main=as.character(country[input$state100]))
   })
   parametres=list(GDP='NY.GDP.MKTP.CD',GDPgrowth="NY.GDP.MKTP.KD.ZG",perCapita="NY.GDP.PCAP.CD",lifeExpectancy="SP.DYN.LE00.IN")
-  country=list(Australia='AU',Russia='RU',India='IN',China='CN',US='US',Canada='CA',European_Union="EU",Great_Britain='GB',France='FR',Germany='DE',Japan='JP',Argentina='AR',Brazil='BR',Indonesia='ID',Italy='IT',Mexico='MX',South_Africa='ZA',Saudi_Arabia='SA'
-               ,Turkey='TR',South_Korea='KR')
-  
+  country=symbols
   data3<-reactive({    
     w=wb(indicator=parametres[input$state35],country=c(country[input$state31],country[input$state32],country[input$state33],country[input$state34],country[input$state36]),startdate=input$bin2,enddate =input$bin3)
     w
@@ -272,8 +267,7 @@ server = function(input, output) {
         pdf(file) # open the pdf device
       # draw the plot
       data_univariate=data4()
-      data_univariate=data_univariate[,1:2]
-      View(data_univariate)
+      data_univariate=data_univariate[,1:3]
       dates=as.Date(data_univariate$date,"%Y")
       xs=xts(data_univariate$value,order.by=dates)
       x.ts = ts(xs, freq=1, start=1960)
@@ -285,12 +279,12 @@ server = function(input, output) {
     }) 
   output$down4 <- downloadHandler(
     filename =  function() {
-      paste("Data", input$var1, sep=".")
+      paste("Data", input$var4, sep=".")
     },
     # content is a function with argument file. content writes the plot to the device
     
     content = function(file) {
-      if(input$var2 == "png")
+      if(input$var4 == "png")
         png(file) # open the png device
       else
         pdf(file) # open the pdf device  
